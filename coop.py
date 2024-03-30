@@ -1,14 +1,52 @@
-from flask import Flask, render_template
-
+from flask import Flask, render_template, flash
+from flask_wtf import FlaskForm
+from wtforms import StringField, SubmitField
+from wtforms.validators import DataRequired
 #start the app
 app = Flask(__name__) 
+app.config['SECRET_KEY'] = "my super secret key"
+####################
+##  begin routing ##
 
+## main routes
 @app.route("/")
 def index():
     return render_template("index.tpl")
+
+@app.route("/features")
+def features():
+    return render_template("features.tpl")
+
+@app.route("/pricing")
+def pricing():
+    return render_template("pricing.tpl")
+
 @app.route("/user/<name>")
 def user(name):
     return render_template("user.tpl", name=name)
+@app.route("/name", methods=['GET','POST'])
+def name():
+    name = None
+    form = NameForm()
+    if form.validate_on_submit():
+        name = form.name.data
+        form.name.data = ''
+        flash("Name submitted and read successfully.")
+    return render_template("name.tpl",
+                           name=name,
+                           form=form)
+
+## error pages
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template("error/404.tpl"), 404
+
+
+##  end routing ##
+##################
+
+####################
+##  Form Classes  ##
+class NameForm(FlaskForm):
+    name = StringField("Enter a name", validators=[DataRequired()])
+    submit= SubmitField("Let'Go!")
