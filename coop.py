@@ -2,8 +2,15 @@ from flask import Flask, render_template, flash
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField
 from wtforms.validators import DataRequired
-#start the app
+from werkzeug.middleware.proxy_fix import ProxyFix
+
 app = Flask(__name__) 
+
+app.wsgi_app = ProxyFix(
+    app.wsgi_app, x_for=1, x_proto=1, x_host=1, x_prefix=1
+)
+#start the app
+
 app.config['SECRET_KEY'] = "my super secret key"
 ####################
 ##  begin routing ##
