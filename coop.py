@@ -11,19 +11,19 @@ app.config['SECRET_KEY'] = "my super secret key"
 ## main routes
 @app.route("/")
 def index():
-    return render_template("index.tpl")
+    return render_template("index.tpl", landing="home")
 
 @app.route("/features")
 def features():
-    return render_template("features.tpl")
+    return render_template("features.tpl", landing="features")
 
 @app.route("/pricing")
 def pricing():
-    return render_template("pricing.tpl")
+    return render_template("pricing.tpl", landing="pricing")
 
 @app.route("/user/<name>")
 def user(name):
-    return render_template("user.tpl", name=name)
+    return render_template("user.tpl", name=name, landing="user" )
 @app.route("/name", methods=['GET','POST'])
 def name():
     name = None
@@ -34,7 +34,7 @@ def name():
         flash("Name submitted and read successfully.")
     return render_template("name.tpl",
                            name=name,
-                           form=form)
+                           form=form, landing="name")
 
 ## error pages
 @app.errorhandler(404)

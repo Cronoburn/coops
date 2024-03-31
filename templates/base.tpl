@@ -25,18 +25,18 @@
               <div class="collapse navbar-collapse" id="navbarColor01">
                 <ul class="navbar-nav me-auto">
                   <li class="nav-item">
-                    <a class="nav-link active" href="/">Home
+                    <a class="nav-link {% if 'home' == landing %} active{% endif %}" href="/">Home
                       <span class="visually-hidden">(current)</span>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="/features">Features</a>
+                    <a class="nav-link {% if 'features' == landing %} active{% endif %}" href="/features">Features</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="/pricing">Pricing</a>
+                    <a class="nav-link {% if 'pricing' == landing %} active{% endif %}" href="/pricing">Pricing</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="/about">About</a>
+                    <a class="nav-link {% if 'about' == landing %} active{% endif %}" href="/about">About</a>
                   </li>
                 </ul>
               </div>
@@ -46,6 +46,7 @@
         {% endblock %}
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/strophe.js@2.0.0/dist/strophe.umd.min.js"></script>
     </body>
 </html>
 
