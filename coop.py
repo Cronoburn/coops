@@ -18,7 +18,7 @@ app.config['SECRET_KEY'] = "my super secret key"
 ## main routes
 @app.route("/")
 def index():
-    return render_template("index.tpl", landing="home")
+    return render_template("blog.tpl", landing="home")
 
 @app.route("/features")
 def features():
@@ -43,11 +43,21 @@ def name():
                            name=name,
                            form=form, landing="name")
 
+## unpublished routes (for maintenence and admin)
+@app.route("/blog")
+def blog():
+    return render_template("blog-post.tpl")
+@app.route("/dig")
+def dig():
+    return render_template("blog_dig.tpl")
+
 ## error pages
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template("error/404.tpl"), 404
-
+@app.errorhandler(502)
+def page_not_found(e):
+    return render_template("error/502.tpl"), 502
 
 ##  end routing ##
 ##################
