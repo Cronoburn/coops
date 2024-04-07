@@ -7,7 +7,10 @@ from werkzeug.middleware.proxy_fix import ProxyFix
 
 bp = Blueprint("user", __name__)
 
-bp.config['SECRET_KEY'] = "my super secret key"
+
+@bp.route("/")
+def rt():
+    return "<h1>users</h1>"
 
 @bp.route("/user/<name>")
 def user(name):
