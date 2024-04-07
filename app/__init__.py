@@ -10,7 +10,7 @@ app = Flask(__name__)
 
 app.register_blueprint(home.bp)
 
-app.register_blueprint(user.bp)
+app.register_blueprint(user.bp, url_prefix="/user/")
 
 # app.wsgi_app = ProxyFix(
 #     app.wsgi_app, x_for=1, x_proto=1, x_host=1, x_prefix=1
