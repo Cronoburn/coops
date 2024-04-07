@@ -66,6 +66,7 @@ $(document).ready(function () {
 });
 /*-- Attempting to connect --*/
 $(document).bind('connect', function (ev, data) {
+    console.log(data);
     var conn= new Strophe.Connection(
         'https://coopslake.solutions:5443/bosh');
     conn.connect(data.jid, data.password, function (status) {
