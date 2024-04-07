@@ -7,6 +7,8 @@ from werkzeug.middleware.proxy_fix import ProxyFix
 
 bp = Blueprint("user", __name__)
 
+bp.config['SECRET_KEY'] = "my super secret key"
+
 @bp.route("/user/<name>")
 def user(name):
     return render_template("user.tpl", name=name, landing="user" )
@@ -21,3 +23,9 @@ def name():
     return render_template("name.tpl",
                            name=name,
                            form=form, landing="name")
+
+####################
+##  Form Classes  ##
+class NameForm(FlaskForm):
+    name = StringField("Enter a name", validators=[DataRequired()])
+    submit= SubmitField("Let's Go!")
