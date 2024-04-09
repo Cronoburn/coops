@@ -10,12 +10,7 @@ var Arthur = {
             console.log("got it");
             console.log(message);
             var div = $("<div></div>");
-<<<<<<< HEAD:static/js/blog.js
-            var messagebody = marked.parse($(message).find("entry > body").text());
-            console.log(messagebody);
-=======
             var messagebosy = marked.parse($(message).find("entry > body").text());
->>>>>>> hydra:app/static/js/blog.js
             var div1 = $build('div',{'class':'card text-body bg-primary mb-3 mx-auto mt-2','style':'max-width:80rem;'})
                 .c('div',{'class':'card-header container-fluid'})
                 .c('div',{'class':'row'})
@@ -24,11 +19,7 @@ var Arthur = {
                 /*.up().c('div',{'class':'d-flex'})*/
                 .up().c('div',{'class':'col-md-3 float-right'})
                 .c('span',{'class':'body-primary'},$(message).find("entry > published").text())
-<<<<<<< HEAD:static/js/blog.js
-                .up().up().up().c('div',{'class':'card-body'})
-=======
                 .up().up().up().c('div',{'class':'card-body'});
->>>>>>> hydra:app/static/js/blog.js
             if (delayed) {
                 $(div).addClass('delayed');
             }
@@ -42,11 +33,7 @@ var Arthur = {
             
             console.log(div);
             $(div).prependTo('#stream');
-<<<<<<< HEAD:static/js/blog.js
-            $(".card-body").append(messagebody)
-=======
             $(".card-body").append(messagebody);
->>>>>>> hydra:app/static/js/blog.js
         }
         }
         return true;

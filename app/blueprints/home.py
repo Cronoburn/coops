@@ -5,8 +5,8 @@ from wtforms import StringField, SubmitField
 from wtforms.validators import DataRequired
 from werkzeug.middleware.proxy_fix import ProxyFix
 
-app = Flask(__name__) 
-mde = Mde(app)
+bp = Blueprint("home", __name__)
+
 
 
 ####################

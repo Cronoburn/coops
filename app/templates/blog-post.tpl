@@ -13,10 +13,6 @@
   
   <div id="input">
     <div class="card text-white bg-primary mb-9" style="max-width: 80rem;">
-<<<<<<< HEAD:templates/blog-post.tpl
-      <div class="card-header">
-        <span class="coopdisp">Post your next big announcement</span>
-=======
         <div class="card-header">
           <!--<label class="col-form-label mt-4" for="inputDefault">Title</label>-->
           <input type="text" class="form-control" placeholder="Title" id="post-title">
@@ -27,7 +23,6 @@
       {{ mde.editor(name='post-body') }}
       <button class="btn btn-lg btn-primary" id="btn-post" type="button">Submit Post</button>
         </div>
->>>>>>> hydra:app/templates/blog-post.tpl
       </div>
       <div class="card-body">
         <!--<label class="col-form-label mt-4" for="inputDefault">Title</label>-->
