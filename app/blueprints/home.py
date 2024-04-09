@@ -1,21 +1,12 @@
-<<<<<<< HEAD:coop.py
-from flask import Flask, render_template, flash
-from flask_mde import Mde
-=======
 from flask import Flask,Blueprint, render_template, flash
->>>>>>> hydra:app/blueprints/home.py
+from flask_mde import Mde
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField
 from wtforms.validators import DataRequired
 from werkzeug.middleware.proxy_fix import ProxyFix
 
-<<<<<<< HEAD:coop.py
 app = Flask(__name__) 
 mde = Mde(app)
-=======
-bp = Blueprint("home", __name__)
-
->>>>>>> hydra:app/blueprints/home.py
 
 
 ####################
