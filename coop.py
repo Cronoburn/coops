@@ -1,10 +1,12 @@
 from flask import Flask, render_template, flash
+from flask_mde import Mde
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField
 from wtforms.validators import DataRequired
 from werkzeug.middleware.proxy_fix import ProxyFix
 
 app = Flask(__name__) 
+mde = Mde(app)
 
 app.wsgi_app = ProxyFix(
     app.wsgi_app, x_for=1, x_proto=1, x_host=1, x_prefix=1

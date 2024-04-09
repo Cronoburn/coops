@@ -9,6 +9,8 @@ var Arthur = {
             console.log("got it");
             console.log(message);
             var div = $("<div></div>");
+            var messagebody = marked.parse($(message).find("entry > body").text());
+            console.log(messagebody);
             var div1 = $build('div',{'class':'card text-body bg-primary mb-3 mx-auto mt-2','style':'max-width:80rem;'})
                 .c('div',{'class':'card-header container-fluid'})
                 .c('div',{'class':'row'})
@@ -18,7 +20,6 @@ var Arthur = {
                 .up().c('div',{'class':'col-md-3 float-right'})
                 .c('span',{'class':'body-primary'},$(message).find("entry > published").text())
                 .up().up().up().c('div',{'class':'card-body'})
-                .c('h4',{'class':'card-title'},$(message).find("entry > body").text());
             if (delayed) {
                 $(div).addClass('delayed');
             }
@@ -26,12 +27,13 @@ var Arthur = {
                     console.log("adding xml");
                     console.log(body);
                     console.log('boop');
-                    div.append(div1.toString());
-                
+                    $(div).append(div1.toString());
+                    console.log("messagebody:\n"+messagebody);
             });
             
             console.log(div);
             $(div).prependTo('#stream');
+            $(".card-body").append(messagebody)
         }
         }
         return true;
@@ -60,7 +62,7 @@ $(document).ready(function () {
         .c('item')
         .c('entry',{xmlns:"http://www.w3.org/2005/Atom"})
         .c('title').t($('#post-title').val())
-        .up().c('body').t($('#post-body').val())
+        .up().c('body').t($('#wmd-input[name="post-body"]').val())
         .up().c('published').t(d.toISOString()));
     });
 });
