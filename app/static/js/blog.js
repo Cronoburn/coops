@@ -6,6 +6,7 @@ var Arthur = {
             if ($(message).find('items').attr('node').match(/^blog\/home/)){
             var delayed = $(message).find('delay').length > 0;
             var body = $(message).find('event > items').contents();
+            var messagebody = marked.parse($(message).find("entry > body").text())
             console.log("got it");
             console.log(message);
             var div = $("<div></div>");
