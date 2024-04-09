@@ -17,7 +17,8 @@
         </div>
         <div class="card-body">
       <!--<label for="exampleTextarea" class="form-label mt-4">Post</label>-->
-      <textarea class="form-control" id="post-body" placeholder="post text here" rows="3"></textarea>
+      <!--<textarea class="form-control" id="post-body" placeholder="post text here" rows="3"></textarea>-->
+      {{ mde.editor(name='post-body') }}
       <button class="btn btn-lg btn-primary" id="btn-post" type="button">Submit Post</button>
         </div>
       </div>

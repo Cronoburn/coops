@@ -1,11 +1,13 @@
 from flask import Flask, render_template, flash
 from flask_wtf import FlaskForm
+from flask_mde import Mde
 from wtforms import StringField, SubmitField
 from wtforms.validators import DataRequired
 from werkzeug.middleware.proxy_fix import ProxyFix
 from app.blueprints import home, user
 
 app = Flask(__name__) 
+mde = Mde(app)
 
 
 app.register_blueprint(home.bp)
