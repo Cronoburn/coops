@@ -42,10 +42,10 @@ var Arthur = {
 
 $(document).ready(function () {
     
-    $(document).trigger('connect', {
-    jid: "blog@coopslake.solutions",
-    password: "hazelmaewetdog",
-    zone: $('#zone').val()});
+    // $(document).trigger('connect', {
+    // jid: "blog@coopslake.solutions",
+    // password: "hazelmaewetdog",
+    // zone: $('#zone').val()});
 
     $('#login_dialog').dialog({
         autoOpen: true,
@@ -61,6 +61,7 @@ $(document).ready(function () {
             }
         }
     });
+
     $('#input').keyup(function () {
         var left = 250 - $(this).val().length;
         $('#coutner .count').text(''+left);
