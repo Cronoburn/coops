@@ -10,4 +10,4 @@ bp = Blueprint("admin", __name__, template_folder="templates", static_folder="st
 
 @bp.route('/')
 def home():
-    pass
+    return render_template("admin/home.tpl" ,landing = "home")

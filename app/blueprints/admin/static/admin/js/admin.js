@@ -47,7 +47,20 @@ $(document).ready(function () {
     password: "hazelmaewetdog",
     zone: $('#zone').val()});
 
-  
+    $('#login_dialog').dialog({
+        autoOpen: true,
+        dragable: true,
+        modal: true,
+        title: 'Login to Administration',
+        buttons: {
+            "Connect": function () {
+                $(document).trigger('connect', {
+                    jid: $('#jid').val(),
+                    password: $('#password').val()
+                });
+            }
+        }
+    });
     $('#input').keyup(function () {
         var left = 250 - $(this).val().length;
         $('#coutner .count').text(''+left);

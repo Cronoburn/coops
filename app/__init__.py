@@ -4,15 +4,16 @@ from flask_mde import Mde
 from wtforms import StringField, SubmitField
 from wtforms.validators import DataRequired
 from werkzeug.middleware.proxy_fix import ProxyFix
-from app.blueprints import home, user
+from app.blueprints import home, user, admin
 
 app = Flask(__name__) 
 mde = Mde(app)
-
-
+app.config['EXPLAIN_TEMPLATE_LOADING '] = True
+app.config['DEBUC'] = True
 app.register_blueprint(home.bp)
 
 app.register_blueprint(user.bp, url_prefix="/user/")
+app.register_blueprint(admin.bp, url_prefix="/admin")
 
 # app.wsgi_app = ProxyFix(
 #     app.wsgi_app, x_for=1, x_proto=1, x_host=1, x_prefix=1
