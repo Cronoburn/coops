@@ -1,6 +1,46 @@
 var Arthur = {
     connection: null,
+    request_items: function(zone) {
+        Arthur.connection.sendIQ($iq({
+            to: "pubsub.coopslake.solutions",
+            type: "get"})
+        .c("pubsub", {"xmlns":"http://jabber.org/protocol/pubsub"})
+        .c("items", {"node":"blog/"+zone})
+        );
+    },
 
+    handle_list: function (iq) {
+        if ($(iq).attr('from').match(/^pubsub\.coopslake\.solutions$/)){
+            if ($(iq).find('items').attr('node').match('blog/'+$('#zone').val())){
+                var items = $(iq).find('item');
+                var stream = $('<div class="cls-card-container"></div>');
+                $(items).each(function (item) {
+                    var cur_item = $(items[item]);
+                    var curId = $(cur_item).attr('id');
+                    var cardContents = ""
+                    +"<div class='card text-body bg-primary mb-3 mx-auto mt-2' style='max-width:80rem' id='"+curId+"'>"
+                    +"<div class='card-header container-fluid'>"
+                       +" <div class='row'>"
+                            +"<div class='mr-auto'>"
+                                +"<span class='bi bi-trash-fill cls-btn' id='"+ curId +"' onClick='remove(this)'> </span>"
+                                +"<span class='bi bi-pencil-fill cls-btn' id='"+ curId +"' onClick='edit(this)'> </span>"
+                                +"<span class='post-id'> " + curId + "</span>"
+                                +"<span class='coopdisp'> " + $(cur_item).find('entry > title').text() + "</span>"
+                                +"<div class='float-right'><span class='body-primary'>" + $(cur_item).find('entry > published').text() + "</span></div>"
+                            +"</div>"
+                            +"</div>"
+                        +"</div>"
+                        +"<div class='card-body' id='"+ curId +"'><div class='stn-body' id='"+ curId +"'><textarea disabled='disabled' class='form-control' id='"+curId+"' rows='5'>"+$(cur_item).find('body').text()+"</textarea></div>"
+                        +"</div>";
+                    console.log(cardContents);
+                    $(stream).prepend(cardContents);
+                });
+                $(stream).prependTo('#stream');
+                $(document).trigger('list');
+            }
+        }
+        return true;
+    },
     handle_message: function (message) {
         if ($(message).attr('from').match(/^pubsub\.coopslake\.solutions$/)){
             if ($(message).find('items').attr('node').match(/^blog\/home/)){
@@ -13,12 +53,11 @@ var Arthur = {
             var messagebosy = marked.parse($(message).find("entry > body").text());
             var div1 = $build('div',{'class':'card text-body bg-primary mb-3 mx-auto mt-2','style':'max-width:80rem;'})
                 .c('div',{'class':'card-header container-fluid'})
-                .c('div',{'class':'row'})
-                .c('div',{'class':'col-md-9'})
-                .c('span',{'class':'coopdisp'},$(message).find("entry > title").text())
-                /*.up().c('div',{'class':'d-flex'})*/
-                .up().c('div',{'class':'col-md-3 float-right'})
-                .c('span',{'class':'body-primary'},$(message).find("entry > published").text())
+                    .c('div',{'class':'row'})
+                        .c('div',{'class':'col-md-9'})
+                            .c('span',{'class':'coopdisp'},"D E " + $(message).find("items > item").attr('id') + " " + $(message).find("entry > title").text())
+                        .up().c('div',{'class':'col-md-3 float-right'})
+                            .c('span',{'class':'body-primary'},$(message).find("entry > published").text())
                 .up().up().up().c('div',{'class':'card-body'});
             if (delayed) {
                 $(div).addClass('delayed');
@@ -39,14 +78,35 @@ var Arthur = {
         return true;
     }
 };
+function edit(i) {
+    var id = $(i).attr('id');
+    var target = $(this).parentsUntil("div","#"+id);
+    console.log("RR");
+    console.log($(this).parentsUntil("div.cls-card-container").html());
+    console.log("RR");
+    if ($(target).find('textarea').attr('disabled',true)) {
+        console.log($(target).find('textarea').attr('disabled'));
+        $(target).find('textarea').removeAttr('disabled');
+        $(i).addClass("cls-btn-toggled");
+        console.log("enabled editor");
+    } else if ($(target).find("textarea").attr('disabled',false)){
+        $(target).find('textarea').prop({ disabled:true });
+        console.log("disabled editor");
+        if ($(i).hasClas('cls-btn-toggled')){
+          $(i).removeClass('cls-btn-toggled');
+        }
+      console.log($("textarea#"+id+".form-control").prop('disabled'));
+    }
+    return true;
+    //$("div#"+id+".stn-body").toggleClass("hidden");
+}
+function remove(i) {
+    alert("delete: "+$(i).attr('id')+"")
+}
+
+
 
 $(document).ready(function () {
-    
-    // $(document).trigger('connect', {
-    // jid: "blog@coopslake.solutions",
-    // password: "hazelmaewetdog",
-    // zone: $('#zone').val()});
-
     $('#login_dialog').dialog({
         autoOpen: true,
         dragable: true,
@@ -58,6 +118,8 @@ $(document).ready(function () {
                     jid: $('#jid').val(),
                     password: $('#password').val()
                 });
+                $('password').val('');
+                $(this).dialog('close');
             }
         }
     });
@@ -98,12 +160,22 @@ $(document).bind('connect', function (ev, data) {
 });
 /*-- connection established --*/
 $(document).bind('connected', function () {
-    Arthur.connection.addHandler(Arthur.handle_message,
+    // Arthur.connection.addHandler(Arthur.handle_message,
+    //                             null,
+    //                             "message",
+    //                             "headline"
+    //                         );
+    Arthur.connection.addHandler(Arthur.handle_list,
                                 null,
-                                "message",
-                                "headline"
+                                "iq",
+                                "result"
                             );
     Arthur.connection.send($pres().c('priority').t('-1'));
+    Arthur.request_items($("#zone").val());
+});
+$(document).bind('list', function (){
+  var snpButtons = "<div><span class=\"btn btm-primary bi bi-pencil-fill\">Edit</span><span class=\"btn btn-primary bi bi-envelope-arrow-up\">New Post</span></div>"
+  $('#btn-pallete').html(snpButtons);
 });
 $(document).bind('disconnected', function () {
     // placeholder
