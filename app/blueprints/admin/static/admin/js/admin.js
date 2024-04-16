@@ -16,7 +16,7 @@ var Arthur = {
                 var stream = $('<div class="cls-card-container"></div>');
                 $(items).each(function (item) {
                     var cur_item = $(items[item]);
-                    var curId = $(cur_item).attr('id');
+                    var curId = "D"+$(cur_item).attr('id');
                     var cardContents = ""
                     +"<div class='card text-body bg-primary mb-3 mx-auto mt-2' style='max-width:80rem' id='"+curId+"'>"
                     +"<div class='card-header container-fluid'>"
@@ -30,7 +30,7 @@ var Arthur = {
                             +"</div>"
                             +"</div>"
                         +"</div>"
-                        +"<div class='card-body' id='"+ curId +"'><div class='stn-body' id='"+ curId +"'><textarea disabled='disabled' class='form-control' id='"+curId+"' rows='5'>"+$(cur_item).find('body').text()+"</textarea></div>"
+                        +"<div class='card-body' id='"+ curId +"'><div class='stn-body' id='"+ curId +"'><textarea disabled='disabled' class='form-control cls-post' id='"+curId+"' rows='5'>"+$(cur_item).find('body').text()+"</textarea></div>"
                         +"</div>";
                     console.log(cardContents);
                     $(stream).prepend(cardContents);
@@ -50,7 +50,7 @@ var Arthur = {
             console.log("got it");
             console.log(message);
             var div = $("<div></div>");
-            var messagebosy = marked.parse($(message).find("entry > body").text());
+            var messagebody = marked.parse($(message).find("entry > body").text());
             var div1 = $build('div',{'class':'card text-body bg-primary mb-3 mx-auto mt-2','style':'max-width:80rem;'})
                 .c('div',{'class':'card-header container-fluid'})
                     .c('div',{'class':'row'})
@@ -79,34 +79,40 @@ var Arthur = {
     }
 };
 function edit(i) {
-    var id = $(i).attr('id');
-    var target = $(this).parentsUntil("div","#"+id);
-    console.log("RR");
-    console.log($(this).parentsUntil("div.cls-card-container").html());
-    console.log("RR");
-    if ($(target).find('textarea').attr('disabled',true)) {
-        console.log($(target).find('textarea').attr('disabled'));
-        $(target).find('textarea').removeAttr('disabled');
-        $(i).addClass("cls-btn-toggled");
-        console.log("enabled editor");
-    } else if ($(target).find("textarea").attr('disabled',false)){
-        $(target).find('textarea').prop({ disabled:true });
-        console.log("disabled editor");
-        if ($(i).hasClas('cls-btn-toggled')){
-          $(i).removeClass('cls-btn-toggled');
-        }
-      console.log($("textarea#"+id+".form-control").prop('disabled'));
+    var at = "textarea#"+$(i).attr('id')+".form-control.cls-post";
+    var ta = document.querySelector(at);
+    console.log(ta);
+    if (ta.getAttribute('disabled','disabled')){
+      ta.removeAttribute('disabled');
+      i.classList.add('cls-btn-toggled');
+    } else {
+      ta.setAttribute('disabled','disabled');
+      i.classList.remove('cls-btn-toggled')
     }
-    return true;
+  return true;
     //$("div#"+id+".stn-body").toggleClass("hidden");
 }
 function remove(i) {
-    alert("delete: "+$(i).attr('id')+"")
+    alert("delete: "+$(i).attr('id'));
 }
-
-
-
 $(document).ready(function () {
+ // $("#blog_post_dialog").dialog( {
+ //    autOpen: false,
+ //    dragable: true,
+ //    modal: true,
+ //    title: "Compose New Blog Entry",
+ //    buttons: {
+ //      "Post": function () {
+ //        $(document).trigger('send_post',{
+ //          title: $("#blog-post-title").val(),
+ //          body: $("#blog-post-body").val()
+ //        });
+ //        $("#blog-post-title").val('');
+ //        $("#blog-post-body").val('');
+ //      }
+ //    }
+ //  });
+
     $('#login_dialog').dialog({
         autoOpen: true,
         dragable: true,
@@ -176,7 +182,20 @@ $(document).bind('connected', function () {
 $(document).bind('list', function (){
   var snpButtons = "<div><span class=\"btn btm-primary bi bi-pencil-fill\">Edit</span><span class=\"btn btn-primary bi bi-envelope-arrow-up\">New Post</span></div>"
   $('#btn-pallete').html(snpButtons);
+  
+  $('.bi-envelope-arrow-up').click(function(){
+    $(document).trigger('newpostwanted');
+  });
 });
+
+$(document).bind('newpostwanted', function (ev, data) {
+   $("#new-post-dialog").dialog("open");
+});
+
+$(document).bind('send_post', function (ev, data){
+  console.log(data);
+});
+
 $(document).bind('disconnected', function () {
     // placeholder
 });

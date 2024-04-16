@@ -10,7 +10,7 @@
     <title>admin</title>
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-ui@1.13.2/dist/jquery-ui.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/strophe.js@2.0.0/dist/strophe.umd.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked@12.0.1/lib/marked.umd.min.js"></script>
     <script src="{{ url_for('admin.static', filename='admin/js/admin.js') }}"></script>
@@ -47,10 +47,54 @@
     {% block content %}
     {% endblock %}
 
-    <!-- login dialog -->
+     <!-- blog-post  dialog -->
+    <div class="hidden" id="blog_post_dialog">
+        <label for="blog-post-title">Title:</label><input type="text" name="blog-post-title" id="blog-post-title">
+        <label for="blog-post-body">Post Body:</label><textarea name="blog-post-body" id="blog-post-body"></textarea>
+    </div>
+
+
+
+    <section class="bg-light">
+        <div class="container">
+          <div class="text-center">
+            <h2>trigger</h2>
+            <p class="lead">test</p>
+            <div class="row justify-content-center">
+              <div class="col-md-8 text-center">
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#test-dg">TEST</button>
+              </div>
+            </div>
+          </div>  
+        </div>
+    </section>
+
+    </div>
+   <!-- login dialog -->
     <div class="hidden" id="login_dialog">
         <label for="jid">JID:</label><input type="text" name="jid" id="jid">
         <label for="password">Password:</label><input type="password" name="password" id="password">
+    </div>
+
+
+
+    <!--testing -->
+    <div id="test-dg" class="modal fade" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modal-title">Test dialog</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+            </div>
+          <div class="modal-body">
+            <p>Lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi Lorem pariatur mollit ex esse exercitation amet. Nisi anim cupidatat excepteur officia. Reprehenderit nostrud nostrud ipsum Lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. Nostrud officia pariatur ut officia. Sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor Lorem duis laboris cupidatat officia voluptate. Culpa proident adipisicing id nulla nisi laboris ex in Lorem sunt duis officia eiusmod. Aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. Voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis.</p>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-submit">Post</button>
+          </div>
+        </div>
+      </div>
+      </div>
     </div>
 </body>
 </body>
