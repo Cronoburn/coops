@@ -1,4 +1,4 @@
-#!/home/eric/sites/remote_coops/coops/.venv/bin/python3
+#!/home/eric/sites/coops/.venv/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys

@@ -71,11 +71,11 @@
 
     </div>
    <!-- login dialog -->
-    <div class="hidden" id="login_dialog">
-        <label for="jid">JID:</label><input type="text" name="jid" id="jid">
-        <label for="password">Password:</label><input type="password" name="password" id="password">
-    </div>
-
+    <!-- <div class="hidden" id="login_dialog"> -->
+    <!--     <label for="jid">JID:</label><input type="text" name="jid" id="jid"> -->
+    <!--     <label for="password">Password:</label><input type="password" name="password" id="password"> -->
+    <!-- </div> -->
+    <!---->
 
 
     <!--testing -->
@@ -87,15 +87,46 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
             </div>
           <div class="modal-body">
-            <p>Lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi Lorem pariatur mollit ex esse exercitation amet. Nisi anim cupidatat excepteur officia. Reprehenderit nostrud nostrud ipsum Lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. Nostrud officia pariatur ut officia. Sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor Lorem duis laboris cupidatat officia voluptate. Culpa proident adipisicing id nulla nisi laboris ex in Lorem sunt duis officia eiusmod. Aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. Voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis.</p>
+ 
+              <table>
+                <tr>
+                  <td> <label for="jid">JID: </label> </td><td> <input type="text" name="jid" id="jid"></td>
+                </tr>
+                <tr>
+                  <td>  <label for="password">Password: </label> </td><td> <input type="password" name="password" id="password"></td>
+                </tr>
+                </table>
+  
           </div>
           <div class="modal-footer">
-            <button class="btn btn-submit">Post</button>
+            <button class="btn btn-submit" id="cls-btn-login">Login</button>
           </div>
         </div>
       </div>
       </div>
     </div>
+  <!--testing -->
+    <div id="post-dg" class="modal fade" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modal-title">Create New Blog Post</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+            </div>
+          <div class="modal-body">
+              <div class="form-group">
+                  <label for="cls-title">Title: </label><input type="text" name="cls-title" id="cls-title">
+                  <label for="cls-post">Body: </label><textarea class='form-control cls-post'  name="cls-post" id="cls-post" rows='5'></textarea>
+              </div>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-submit" id="cls-btn-post">Post</button>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+
 </body>
 </body>
 </html>

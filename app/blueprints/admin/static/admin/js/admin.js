@@ -24,7 +24,7 @@ var Arthur = {
                             +"<div class='mr-auto'>"
                                 +"<span class='bi bi-trash-fill cls-btn' id='"+ curId +"' onClick='remove(this)'> </span>"
                                 +"<span class='bi bi-pencil-fill cls-btn' id='"+ curId +"' onClick='edit(this)'> </span>"
-                                +"<span class='post-id'> " + curId + "</span>"
+                                +"<span class='post-id'> " + curId.substring(1) + "</span>"
                                 +"<span class='coopdisp'> " + $(cur_item).find('entry > title').text() + "</span>"
                                 +"<div class='float-right'><span class='body-primary'>" + $(cur_item).find('entry > published').text() + "</span></div>"
                             +"</div>"
@@ -96,45 +96,38 @@ function remove(i) {
     alert("delete: "+$(i).attr('id'));
 }
 $(document).ready(function () {
- // $("#blog_post_dialog").dialog( {
- //    autOpen: false,
- //    dragable: true,
- //    modal: true,
- //    title: "Compose New Blog Entry",
- //    buttons: {
- //      "Post": function () {
- //        $(document).trigger('send_post',{
- //          title: $("#blog-post-title").val(),
- //          body: $("#blog-post-body").val()
- //        });
- //        $("#blog-post-title").val('');
- //        $("#blog-post-body").val('');
- //      }
- //    }
- //  });
-
-    $('#login_dialog').dialog({
-        autoOpen: true,
-        dragable: true,
-        modal: true,
-        title: 'Login to Administration',
-        buttons: {
-            "Connect": function () {
-                $(document).trigger('connect', {
-                    jid: $('#jid').val(),
-                    password: $('#password').val()
-                });
-                $('password').val('');
-                $(this).dialog('close');
-            }
-        }
+  // old way of dialog
+    // $('#login_dialog').dialog({
+    //     autoOpen: true,
+    //     dragable: true,
+    //     modal: true,
+    //     title: 'Login to Administration',
+    //     buttons: {
+    //         "Connect": function () {
+    //             $(document).trigger('connect', {
+    //                 jid: $('#jid').val(),
+    //                 password: $('#password').val()
+    //             });
+    //             $('password').val('');
+    //             $(this).dialog('close');
+    //         }
+    //     }
+    // });
+    //
+  //new way of dialog
+    $('#test-dg').modal('show');
+    $('#cls-btn-login').click(function () {
+        $(document).trigger('connect', {
+          jid: $('#jid').val(),
+          password: $('#password').val()
+        });
+      $('#test-dg').modal('hide');
     });
-
     $('#input').keyup(function () {
         var left = 250 - $(this).val().length;
         $('#coutner .count').text(''+left);
     });
-    $('#btn-post').click( function(ev){
+    $('#cls-btn-post').click( function(ev){
         var d = new Date();
         Arthur.connection.sendIQ($iq({to:"pubsub.coopslake.solutions",
                         type:"set",
@@ -143,10 +136,11 @@ $(document).ready(function () {
         .c('publish',{node:"blog/home"})
         .c('item')
         .c('entry',{xmlns:"http://www.w3.org/2005/Atom"})
-        .c('title').t($('#post-title').val())
-        .up().c('body').t($('#wmd-input[name="post-body"]').val())
+        .c('title').t($('#cls-title').val())
+        .up().c('body').t($('#cls-post').val())
         .up().c('published').t(d.toISOString()));
     });
+
 });
 /*-- Attempting to connect --*/
 $(document).bind('connect', function (ev, data) {
@@ -189,7 +183,7 @@ $(document).bind('list', function (){
 });
 
 $(document).bind('newpostwanted', function (ev, data) {
-   $("#new-post-dialog").dialog("open");
+   $("#post-dg").modal('show');
 });
 
 $(document).bind('send_post', function (ev, data){
