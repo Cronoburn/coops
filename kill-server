@@ -1,2 +1,0 @@
-#!/bin/bash
-kill $(ps aux | grep 'wsgi' | awk '{print $2}')
