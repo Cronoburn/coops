@@ -22,3 +22,8 @@ body {
    background: hsla(0, 0%, 100%, 0.274);
    backdrop-filter: blur(10px);
  }
+ .coopdisp {
+   font-family: Futura;
+   color: hsl(120,100%,50%) !important;
+   -webkit-text-stroke: 1px black;
+ }

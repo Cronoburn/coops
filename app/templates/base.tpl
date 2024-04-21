@@ -13,17 +13,13 @@
             font-family: Futura;
             src: url({{ url_for('static', filename='fonts/Fundispl.ttf') }});
           }
-          .coopdisp {
-            font-family: Futura;
-            color: hsl(120,100%,50%) !important;
-          }
           .coopbg {
             background-image:  url({{ url_for('static',filename='images/coop-big.svg') }});
             background-size: cover;
             background-repeat: no-repeat;
-            background-position: center;
+            background-position-x: center;
+            background-position-y: top 50px;
             background-attachment: fixed;
-            min-height: 500px;
 
           }
         </style>
