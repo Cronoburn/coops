@@ -63,7 +63,7 @@
                     <a class="nav-link {% if 'about' == landing %} active{% endif %}" href="/about">About</a>
                   </li>
                 </ul>
-                <div class="d-flex"><span class="coopdisp">Coop's Lake Solutions</span></div>
+                <div class="d-flex"><span class="coopdisp">812-608-0084</span></div>
               </div>
             </div>
         </nav>

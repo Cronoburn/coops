@@ -18,3 +18,7 @@ body {
  .hidden {
     display: none;
  }
+ .glassed{
+   background: hsla(0, 0%, 100%, 0.274);
+   backdrop-filter: blur(10px);
+ }
