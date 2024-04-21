@@ -39,7 +39,7 @@
         <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-        <input type="hidden" id="zone" value="{% if landing is defined %} {{ landing }} {% else %} home {% endif %} ">
+        <input type="hidden" id="zone" value="{% if landing is defined %}{{ landing }}{% else %}home{% endif %}">
         <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
             <div class="container-fluid">
               <a class="navbar-brand coopdisp" href="/">Lakeside</a>

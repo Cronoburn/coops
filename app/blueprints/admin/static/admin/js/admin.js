@@ -205,21 +205,21 @@ $(document).bind('connected', function () {
     Arthur.request_items($("#zone").val(),0);
 });
 $(document).bind('list', function (){
-  var snpButtons = "<div><span class=\"btn btm-primary bi bi-pencil-fill\">Edit</span><span class=\"btn btn-primary bi bi-envelope-arrow-up\">New Post</span><span class=\"bi bi-images btn btn-primary\"</div>"
+  var snpButtons = "<div><span class=\"btn btm-primary bi bi-pencil-fill\">Edit</span><span class=\"btn btn-primary bi bi-envelope-arrow-up\">New Post</span><span class=\"bi bi-images btn btn-primary\">Images</span></div>"
   $('#btn-pallete').html(snpButtons);
   
   $('.bi-envelope-arrow-up').click(function(){
     $(document).trigger('newpostwanted');
   });
-});
-
-$('.bi-images').click(function () {
-  $.ajax({
-    url: "https://rumble.cloud/v1/6286f6ffd65d44b683f539143e539b6c/lakesidebucket/"
-  }).then(function (data) {
-    console.log(data);
+  $('.bi-images').click(function (e) {
+    console.log('images');
+    $('#cls-btn-post').click(function () {
+      console.log('post clicked');
+    });
+    $('#images-dg').modal('show');
   });
 });
+
 
 $(document).bind('newpostwanted', function (ev, data) {
    $("#post-dg").modal('show');
