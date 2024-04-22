@@ -20,7 +20,7 @@ body {
  }
  .glassed{
    background: hsla(0, 0%, 15%, .5);
-   backdrop-filter: blur(5px);
+   backdrop-filter: blur(5px) saturate(.75);
  }
  .coopdisp {
    font-family: Futura;
