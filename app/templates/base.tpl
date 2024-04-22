@@ -60,7 +60,7 @@
                     <a class="nav-link {% if 'about' == landing %} active{% endif %}" href="/about">About</a>
                   </li>
                 </ul>
-                <div class="d-flex"><a ref="tel:812-608-0084" class="coopdisp">812-608-0084</a><span class="bi bi-telephone-fill"></span></div>
+                <div class="d-flex"><a ref="tel:1-812-608-0084" class="coopdisp">812-608-0084</a><span class="bi bi-telephone-fill"></span></div>
               </div>
             </div>
         </nav>
