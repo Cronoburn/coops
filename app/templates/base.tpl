@@ -23,6 +23,7 @@
 
           }
         </style>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
         <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.png') }}">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -59,7 +60,7 @@
                     <a class="nav-link {% if 'about' == landing %} active{% endif %}" href="/about">About</a>
                   </li>
                 </ul>
-                <div class="d-flex"><span class="coopdisp">812-608-0084</span></div>
+                <div class="d-flex"><a ref="tel:812-608-0084" class="coopdisp">812-608-0084</a><span class="bi bi-telephone-fill"></span></div>
               </div>
             </div>
         </nav>

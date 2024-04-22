@@ -59,7 +59,6 @@ var Arthur = {
     },
 
 // current method of handling a list of returned entries
-//   ... not working
     handle_list: function (iq) {
         console.log('got list');
         if ($(iq).attr('from').match(/^pubsub\.coopslake\.solutions$/)){
@@ -71,11 +70,11 @@ var Arthur = {
                     var curId = "D"+$(cur_item).attr('id');
                     var messagebody = marked.parse($(cur_item).find("entry > body").text());
                     var cardContents = ""
-                    +"<div class=\"card text-body bg-primary mb-3 mx-auto mt-2\" style=\"max-width:80rem;\">"
+                    +"<div class=\"card text-body glassed mb-3 mx-auto mt-2\" style=\"max-width:80rem;\">"
                     +"<div class=\"card-header container-fluid\" id=\""+curId+"\">"
                     +"<div class=\"row\">"
                     +"<div class=\"col-md-9\"><span class=\"coopdisp\">"+$(cur_item).find("entry > title").text()+"</span></div><div class=\"col-md-3 float-right\"><span class=\"body-primary\">"+$(cur_item).find('entry > published').text()+"</span></div></div>"
-                    +"</div><div class=\"card-body\">"
+                    +"</div><div class=\"card-body glassed\">"
                     +messagebody
                     +"</div></div>";
                     console.log(cardContents);
